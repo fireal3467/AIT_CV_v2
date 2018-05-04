@@ -30,7 +30,6 @@ typedef enum {
 } R2ImageCompositeOperation;
 
 
-
 // Class definition
 
 class R2Image {
