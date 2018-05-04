@@ -1037,6 +1037,85 @@ blendOtherImageHomography(R2Image * otherImage)
     return;
 }
 
+
+struct FF
+{
+    int x;
+    int y; 
+    int ssd; 
+
+    FF(int x, int y, int ssd) : x(x), y(y), ssd(ssd)
+    {
+    }
+
+    bool operator<(const struct ff& other) const
+    {
+        //Your priority logic goes here
+        return ssd < other.ssd;
+    }
+};
+
+//Used on the first frame of the freeze frame video processing
+//in - nothing
+//out - 4 points which correspond to the centers of the features tracked
+std::vector<int> R2Image::
+ContinuousFrameProcessing(R2Image* marker, std::vector<int> guess)
+{
+    //TODO
+    //load r2image from file of the feature
+    //compute an ssd of the entire frame to find the picture most similar
+    if(guess.empty()){
+        //ddon't use the guess here
+        return FirstFrameProcessing(marker);
+    }
+    for(int x = 0; x < width; x++){
+        for(int y = 0; y < height; y++){
+
+
+
+
+
+        }
+    }
+}
+
+
+std::vector<int> FirstFrameProcessing(R2Image* marker)
+{
+    std::priority_queue<FF> pq;
+
+    for(int x = 0; x < width - marker.width; x++){
+        for(int y = 0; y < height - marker.height; y++){
+            int ssd = 0; 
+            for(int i = 0; i < marker.width; i++){
+                for(int j = 0; j < marker.height; j++){
+                    R2Pixel vPixel = Pixel(x + i, y + j);
+                    R2Pixel mPixel = marker->Pixel(i,j);
+
+                    SSD += ((vPixel.Red()  - mPixel.Red()) * (vPixel.Red()  - mPixel.Red())) + 
+                            ((vPixel.Green() - mPixel.Green()) * (vPixel.Green() - mPixel.Green())) +
+                            ((vPixel.Blue() - mPixel.Blue()) * (vPixel.Blue() - mPixel.Blue()));
+                }
+            }
+            pq.push(FF(x,y,ssd));
+        }
+    }
+
+    //take the top 4 locations and return them. 
+
+    std::vector<int> markerLocations;
+
+    for(int i = 0 ; i < 4; i++){
+        FF marker = pq.top(); 
+        pq.pop(); 
+        markerLocations.push_back(marker.x);
+        markerLocations.push_back(marker.y);
+    }
+
+    return markerLocations; 
+}
+
+
 ////////////////////////////////////////////////////////////////////////
 // I/O Functions
 ////////////////////////////////////////////////////////////////////////

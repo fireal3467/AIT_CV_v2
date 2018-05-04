@@ -45,7 +45,8 @@ static char options[] =
 "  -sharpen \n"
 "  -matchTranslation <file:other_image>\n"
 "  -matchHomography <file:other_image>\n"
-"  -video\n";
+"  -video\n"
+"  -ff\n";
 
 
 static void 
@@ -140,6 +141,13 @@ main(int argc, char **argv)
 	  image->svdTest();
 	  return 0;
     }
+  else if (!strcmp(argv[i], "-ff")) {
+    printf("FF processing");
+
+
+
+
+  }
 	else if (!strcmp(argv[i], "-video")) {
 		printf("Video processing started\n");
 

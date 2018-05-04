@@ -74,6 +74,9 @@ class R2Image {
   void Harris(double sigma);
   void Sharpen(void);
 
+  //FinalProject - FreezeFrame
+  std::vector<int> ContinuousFrameProcessing(R2Image* marker, std::vector<int> guess);
+
   // further operations
   void blendOtherImageTranslated(R2Image * otherImage);
   void blendOtherImageHomography(R2Image * otherImage);
