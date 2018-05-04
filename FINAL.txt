@@ -1,0 +1,28 @@
+					AIT Computer Vision
+					Final Project: Freeze Frame
+					Alan, Julia
+
+====== v.1 ======
+- obtain input video
+- process first frame & 'cut out' 4 markers. save as .jpg
+- give 4 jpg as input to function (open as R2Image s)
+- find 4 markers on each frame (maintain last coordinates for better local searching)
+       - option: high pass to high pass compare
+       - what we're going to do: just SSD it
+- for now, draw a lil square around marker
+
+
+
+
+===(a future version)===
+(1)  *New Function*
+first frame processing
+      - In: R2Image
+      - Out: vector of 8 points. Each marker (4) defined by 2 points
+      
+      - find 4 markers
+      
+
+(2) feature tracking
+locate 4 markers on every frame
+based on previous location (local search)
