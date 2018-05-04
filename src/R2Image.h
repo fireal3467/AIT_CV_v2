@@ -2,7 +2,7 @@
 #ifndef R2_IMAGE_INCLUDED
 #define R2_IMAGE_INCLUDED
 
-
+#include <vector>
 
 // Constant definitions
 
@@ -75,6 +75,7 @@ class R2Image {
   void Sharpen(void);
 
   //FinalProject - FreezeFrame
+  std::vector<int> FirstFrameProcessing(R2Image* marker);
   std::vector<int> ContinuousFrameProcessing(R2Image* marker, std::vector<int> guess);
 
   // further operations

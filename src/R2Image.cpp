@@ -1048,7 +1048,7 @@ struct FF
     {
     }
 
-    bool operator<(const struct ff& other) const
+    bool operator<(const struct FF& other) const
     {
         //Your priority logic goes here
         return ssd < other.ssd;
@@ -1079,20 +1079,20 @@ ContinuousFrameProcessing(R2Image* marker, std::vector<int> guess)
     }
 }
 
-
-std::vector<int> FirstFrameProcessing(R2Image* marker)
+std::vector<int> R2Image::
+FirstFrameProcessing(R2Image* marker)
 {
     std::priority_queue<FF> pq;
 
-    for(int x = 0; x < width - marker.width; x++){
-        for(int y = 0; y < height - marker.height; y++){
+    for(int x = 0; x < width - marker->Width(); x++){
+        for(int y = 0; y < height - marker->Height(); y++){
             int ssd = 0; 
-            for(int i = 0; i < marker.width; i++){
-                for(int j = 0; j < marker.height; j++){
+            for(int i = 0; i < marker->Width(); i++){
+                for(int j = 0; j < marker->Height(); j++){
                     R2Pixel vPixel = Pixel(x + i, y + j);
                     R2Pixel mPixel = marker->Pixel(i,j);
 
-                    SSD += ((vPixel.Red()  - mPixel.Red()) * (vPixel.Red()  - mPixel.Red())) + 
+                    ssd += ((vPixel.Red()  - mPixel.Red()) * (vPixel.Red()  - mPixel.Red())) + 
                             ((vPixel.Green() - mPixel.Green()) * (vPixel.Green() - mPixel.Green())) +
                             ((vPixel.Blue() - mPixel.Blue()) * (vPixel.Blue() - mPixel.Blue()));
                 }
